@@ -47,15 +47,15 @@ function ApiConfig(config: ApiConfigOptions): MethodDecorator {
 
 export type PhraseApiConfigOptions = ApiConfigOptions;
 export function PhraseApiConfig(config: ApiConfigOptions): MethodDecorator {
-    const { headers = [] } = config;
-    headers.push({
-        name: 'auth',
-        example: '111-233',
-        required: true,
-    });
+    // const { headers = [] } = config;
+    // headers.push({
+    //     name: 'auth',
+    //     example: '111-233',
+    //     required: true,
+    // });
 
     return ApiConfig({
         ...config,
-        headers,
+        // headers,
     });
 }
