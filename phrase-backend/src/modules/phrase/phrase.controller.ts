@@ -19,7 +19,7 @@ import {
     IPhraseMergeQuery,
     PhraseCheckApiConfig,
     PhraseCheckQuerySchema,
-    PhraseCheckRouteHandler,
+    PhraseCheckRouteHandler, PhraseCreateLocalesApiConfig, PhraseCreateLocalesRouteHandler,
     PhraseDownloadApiConfig,
     PhraseDownloadQuerySchema,
     PhraseDownloadRouteHandler,
@@ -42,6 +42,7 @@ export class PhraseController {
         private readonly phraseUploadRoute: PhraseUploadRouteHandler,
         private readonly phraseDownloadRoute: PhraseDownloadRouteHandler,
         private readonly phraseMergeRoute: PhraseMergeRouteHandler,
+        private readonly phraseCreateLocalesRoute: PhraseCreateLocalesRouteHandler,
     ) {}
 
     @Get('check')
@@ -86,5 +87,11 @@ export class PhraseController {
             ...query,
             file,
         });
+    }
+
+    @Get('create-locales')
+    @PhraseApiConfig(PhraseCreateLocalesApiConfig)
+    public async onCreateLocales(){
+        return this.phraseCreateLocalesRoute.handle$()
     }
 }

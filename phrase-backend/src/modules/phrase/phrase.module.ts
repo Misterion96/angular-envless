@@ -3,7 +3,7 @@ import { Logger, MiddlewareConsumer, Module, NestModule, Type } from '@nestjs/co
 import { PhraseController } from './phrase.controller';
 import { AuthMiddleware } from './phrase.middleware';
 import {
-    PhraseCheckRouteHandler,
+    PhraseCheckRouteHandler, PhraseCreateLocalesRouteHandler,
     PhraseDownloadRouteHandler,
     PhraseMergeRouteHandler,
     provideUploadRouteHandleServices,
@@ -16,6 +16,7 @@ const REQUEST_HANDLERS: Type<IPhraseRouteHandler<unknown, unknown>>[] = [
     PhraseMergeRouteHandler,
     PhraseCheckRouteHandler,
     PhraseDownloadRouteHandler,
+    PhraseCreateLocalesRouteHandler,
 ];
 
 @Module({
