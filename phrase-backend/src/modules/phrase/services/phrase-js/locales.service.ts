@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Locale, LocalesApi, LocalesListRequest } from 'phrase-js';
-import { LocaleDownloadRequest, LocaleShowRequest } from 'phrase-js/src/apis/LocalesApi';
+import {
+    LocaleCreateRequest,
+    LocaleDeleteRequest,
+    LocaleDownloadRequest,
+    LocaleShowRequest
+} from 'phrase-js/src/apis/LocalesApi';
 import { LocaleDetails } from 'phrase-js/src/models';
 import { lastValueFrom, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -25,6 +30,10 @@ export class PhraseLocalesService {
         );
     }
 
+    public getAll(requestParameters: LocalesListRequest): Promise<Array<Locale>> {
+        return  this.localesApi.localesList(requestParameters)
+    }
+
     public localeShow$(requestParameters: LocaleShowRequest): Observable<LocaleDetails> {
         return phrasePromiseToObservable(async () => this.localesApi.localeShow(requestParameters));
     }
@@ -43,5 +52,13 @@ export class PhraseLocalesService {
 
     public async getDefaultLocale(requestParameters: LocalesListRequest): Promise<Locale> {
         return lastValueFrom(this.getDefaultLocale$(requestParameters));
+    }
+
+    public createLocale$(params: LocaleCreateRequest): Observable<LocaleDetails> {
+        return phrasePromiseToObservable(async () => this.localesApi.localeCreate(params))
+    }
+
+    public deleteLocale$(requestParameters: LocaleDeleteRequest): Observable<void> {
+        return phrasePromiseToObservable(async () => this.localesApi.localeDelete(requestParameters))
     }
 }

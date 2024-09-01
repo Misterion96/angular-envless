@@ -10,14 +10,14 @@ import {
     ProjectUpdateRequest,
 } from 'phrase-js';
 import { lastValueFrom, Observable, of, throwError } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { PhraseConfigurationService } from './configuration.service';
 import { phrasePromiseToObservable } from './helpers/phrase-promise-to-observable';
 
 @Injectable()
 export class PhraseProjectsService {
-    private readonly projectAPI: ProjectsApi = new ProjectsApi(this.configuration);
+    public readonly projectAPI: ProjectsApi = new ProjectsApi(this.configuration);
 
     constructor(
         @Inject(PhraseConfigurationService)
@@ -28,6 +28,12 @@ export class PhraseProjectsService {
         return phrasePromiseToObservable(async () =>
             this.projectAPI.projectsList(requestParameters),
         );
+    }
+
+    public async project(requestParameters: ProjectsListRequest): Promise<Project> {
+        const projects = await this.projectAPI.projectsList(requestParameters);
+
+        return projects[0];
     }
 
     public projectCreate$(requestParameters: ProjectCreateRequest): Observable<ProjectDetails> {

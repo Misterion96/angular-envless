@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { AffectedResources, KeysApi, KeysDeleteCollectionRequest } from 'phrase-js';
+import { AffectedResources, KeysApi, KeysDeleteCollectionRequest, TranslationKey } from 'phrase-js';
+import { KeysListRequest } from 'phrase-js/src/apis/KeysApi';
 import { Observable } from 'rxjs';
 
 import { PhraseConfigurationService } from './configuration.service';
@@ -17,5 +18,13 @@ export class PhraseKeysService {
         return phrasePromiseToObservable(async () =>
             this.keysApi.keysDeleteCollection(requestParameters),
         );
+    }
+
+    public getAll(params: KeysListRequest): Promise<TranslationKey[]>{
+        return this.keysApi.keysList(params)
+    }
+
+    public delete(requestParameters: KeysDeleteCollectionRequest): Promise<AffectedResources>{
+        return this.keysApi.keysDeleteCollection(requestParameters)
     }
 }
