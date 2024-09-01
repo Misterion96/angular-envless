@@ -9,7 +9,7 @@ import {
 import { Request, Response } from 'express';
 import { EMPTY, Observable } from 'rxjs';
 
-import { TPhraseMergeBody } from './phrase-merge.schemas';
+import { TPhraseMergeBody } from './schemas';
 
 function getBranchFromAzure(fullBranch: string): string {
     return fullBranch.split('/').pop();

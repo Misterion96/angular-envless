@@ -3,7 +3,7 @@ import { catchError, lastValueFrom, Observable, of } from 'rxjs';
 
 import { PhraseBranchesService, PhraseProjectsService } from '../../services/phrase-js';
 import { IPhraseRouteHandler } from '../phrase-route-handler.interface';
-import { IPhraseMergeQuery } from './phrase-merge.schemas';
+import { IPhraseMergeQuery } from './schemas';
 
 export type TMergeFeatureBranchResult = never | void;
 

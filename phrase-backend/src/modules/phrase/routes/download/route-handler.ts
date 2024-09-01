@@ -12,7 +12,7 @@ import {
     PhraseProjectsService,
 } from '../../services/phrase-js';
 import { IPhraseRouteHandler } from '../phrase-route-handler.interface';
-import { PhraseDownloadQuerySchema } from './phrase-download.schemas';
+import { PhraseDownloadQuerySchema } from './schemas';
 
 const archiver = require('archiver');
 
